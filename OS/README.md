@@ -75,6 +75,26 @@ _____
 _____
 ### 🔴 PCB(Process Control Block)이란?
 프로세스에 관한 정보를 저장하는 구조체
+
 프로세스 당 하나씩 존재하며 프로세스가 생성될 때 만들어지고 종료되면 삭제
+
 **커널에 의해 생성, 저장, 읽혀지는 등의 관리됨**
+_____
+### 🔴 프로세스의 생명 주기와 상태 변이
+![Process Life Cycle](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbFhNJu%2Fbtr5PREMV2G%2Fmr9OvmKZulcxmSpZYLFjy0%2Fimg.png)
+
+상태 변이는 **커널 코드**에 의해 이루어짐
+_____
+### 🔴 스레드란?
+운영 체제나 프로세스 내에서 실행되는 가장 작은 작업 단위
+
+스레드 출현 목적
+- 프로세스 보다 작은 실행 단위 필요
+- 프로세스의 생성 및 소멸에 따른 오버헤드 감소
+- 빠른 컨텍스트 스위칭
+- 프로세스들 사이의 통ㅇ신에 대한 어려움 해소
+
+스레드마다 TCB(Thread Control Block) 생성
+
+![Process and Thread](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkHGmX%2FbtsaESFpHrp%2F6if2bm4y7XjTg9iT3vnTyK%2Fimg.png)
 _____
