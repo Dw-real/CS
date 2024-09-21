@@ -48,6 +48,14 @@ _____
 ✅**사용자 공간과 커널 공간으로 나누는 이유**
 응용프로그램으로부터 커널 코드와 데이터를 지키기 위함
 _____
+### 🔴 시스템 호출(System Call)이란?
+사용자나 응용프로그램이 커널에서 제공하는 기능을 사용하기 위한 인터페이스
+
+운영체제는 커널이 제공하는 서비스를 **시스템 호출**을 사용해야만 사용할 수 있도록 제한함으로써 컴퓨터 자원을 보호하면서 사용자나 응용 프로그램에게 서비스를 제공
+_____
+### 🔴 인터럽트(Interrupt)란?
+하드웨어 장치들이 CPU에게 하드웨어 신호를 물리적으로 발생시켜 입출력 완료나 타이머 완료 등을 CPU에게 알리는 방법
+_____
 ### 🔴 프로세스란?
 메모리에 적재되어 **실행 중**인 프로그램
 
@@ -84,6 +92,12 @@ _____
 ![Process Life Cycle](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbFhNJu%2Fbtr5PREMV2G%2Fmr9OvmKZulcxmSpZYLFjy0%2Fimg.png)
 
 상태 변이는 **커널 코드**에 의해 이루어짐
+_____
+### 🔴 프로세스의 종류
+- 부모 프로세스 - 프로세스를 생성한 프로세스
+- 자식 프로세스 - 프로세스에 의해 생성된 프로세스
+- 좀비 프로세스 - 종료하였지만 부모가 종료코드를 읽지 않은 상태로 시스템에 남아있는 프로세스
+- 고아 프로세스 - 부모가 먼저 종료한 자식 프로세스
 _____
 ### 🔴 스레드란?
 운영 체제나 프로세스 내에서 실행되는 가장 작은 작업 단위
@@ -122,5 +136,100 @@ _____
    * 처리율이 낮음
 
 ❗실행사례
-![FCFS](
-  
+![FCFS](https://github.com/Dw-real/CS/blob/main/OS/FCFS.png?raw=true)
+
+2. SJF(Shortest Job First) 스케줄링
+  * 실행 시간이 가장 짧은 스레드를 먼저 스케줄링
+  * 비선점 스케줄링
+  * 기아 발생 가능
+  * 스레드의 실행 시간을 예측할 수 없기 때문에 현실에서 사용 불가
+
+❗실행사례
+![SJF](https://github.com/Dw-real/CS/blob/main/OS/SJF.png?raw=true)
+
+3. SRTF(Shortest Remaining Time First) 스케줄링
+  * 남은 실행 시간이 가장 짧은 스레드를 먼저 스케줄링
+  * 선점 스케줄링
+  * 기아 발생 가능
+  * 스레드의 실행 시간을 예측할 수 없기 때문에 현실에서 사용불가
+
+❗실행사례
+![SRTF](https://github.com/Dw-real/CS/blob/main/OS/SRTF.png?raw=true)
+
+4. RR(Round-Robin) 스케줄링
+  * 스레드들을 타임 슬라이스 주기로 스케줄링
+  * 선점 스케줄링
+  * 기아 발생 X
+  * 구현이 쉬우나 잦은 스케줄링으로 컨텍스트 스위칭에 소요되는 시간이 큼
+  * 타임 슬라이스가 작을수록 성능 저하
+
+❗실행사례
+![RR 2ms](https://github.com/Dw-real/CS/blob/main/OS/RR1.png?raw=true)
+
+![RR 1ms](https://github.com/Dw-real/CS/blob/main/OS/RR2.png?raw=true)
+
+5. Priroiry 스케줄링
+  * 우선순위에 따라 스레드를 실행
+  * 선점/비선점 스케줄링
+  * 기아 발생 가능
+  * 스레드마다 고정 우선순위를 가지는 실시간 시스템에서 주로 사용
+
+6. MLQ(Multi-level Queue) 스케줄링
+  * n개의 우선순위 레벨로 구분하여 레벨이 높은 스레드를 우선 처리
+  * 선점/비선점 스케줄링
+  * 기아 발생 가능
+  * 스레드 별로 고정 우선순위를 두고 높은 순위의 스레드를 먼저 실행시키는 시스템에서 사용
+
+7. MLFQ(Multi-level Feedback Queue) 스케줄링
+  * 우선순위로 구분된 n개의 큐를 두어 높은 레벨의 큐에 있는 스레드를 먼저 스케줄링
+  * 선점 스케줄링
+  * 기아 발생 X
+  * 알고리즘이 복잡하여 CPU의 오버헤드가 증가됨
+_____
+### 🔴 스레드 동기화
+다수의 스레드가 공유 데이터를 동시에 접근하는 충돌 상황에서 공유 데이터가 훼손되지 않도록 스레드의 실행을 제어하는 기법
+
+❗공유 집계판 문제의 코드 사례
+![공유 집계판 문제](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcMNklq%2FbtsbTpWnX7W%2FQtPOTp2WhhHwPqQM9lO8UK%2Fimg.png)
+![공유 집계판 문제 발생](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FL19gO%2Fbtsb60glem2%2FZAKKb6766PHjQWNJrtokA0%2Fimg.png)
+
+🟥 문제점
+T1과 T2가 공유 변수 sum에 접근하여 공유 데이터 sum이 훼손
+
+🟥 해결 방법
+한 스레드가 공유 데이터 사용을 마칠 때 까지 다른 스레드가 공유 데이터에 접근하지 못하도록 제어
+
+🟡 스레드 동기화와 관련된 중요 개념
+  * 임계 구역 : 공유 데이터에 접근하는 코드 블록
+  * 상호 배제 : 멀티스레드가 실행되는 환경에서 한 스레드가 임계구역 전체를 배타적으로 실행하도록 보장하는 기법
+
+##### 상호 배제 구현
+하드웨어적 방법 - 인터럽트 서비스 금지, 원자명령 활용
+
+1. 인터럽트 서비스 금지
+임계구역으로 진입할 때 entry 코드에서 인터럽트 서비스를 금지하고 exit 코드에서 인터럽트 서비스를 허용하는 CPU 명령들을 실행하는 방법
+
+❗동작 과정
+![인터럽트 서비스 금지](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcBQ0J7%2FbtsbSfmkBun%2Fqmi107wha0gHkiDuJRjTWk%2Fimg.png)
+
+**문제점**
+1. 임계구역을 실행하는 동안 모든 인터럽트가 무시됨
+2. 단일 CPU 시스템에서는 활용 가능하지만 멀티코어를 비롯한 다중 CPU를 가진 시스템에서는 활용할 수 없다.
+
+2. 원자명령(Atomic instruction) 사용
+상호배제를 위해 만들어진 CPU 명령으로 오늘날 상호배제를 구현하기 위해 사용하는 기법
+
+🟥 원자명령 없이 lock 변수를 이용한 상호 배체 시도
+lock 변수 : 1이면 잠금 상태 0이면 열린 상태
+
+![성공 사례](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbtsLkR%2FbtscmMBImP1%2FH34lUhOBKCiCYuMGU9k1u0%2Fimg.png)
+![실패 사례](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbt23lC%2FbtsbTpvlASI%2FKd3poetuqwZJ32vJfJWdck%2Fimg.png)
+
+lock 변수를 사용한 상호배제가 실패한 원인
+
+lock 변수 값을 읽어 들이는 명령과 lock 변수를 1로 바꾸는 명령 사이에 컨텍스트 스위칭이 발생할 때 문제 발생
+
+🟥 해결 방법 - 원자명령 도입
+
+
+
