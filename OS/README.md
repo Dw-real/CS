@@ -194,9 +194,11 @@ _____
 ![공유 집계판 문제 발생](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FL19gO%2Fbtsb60glem2%2FZAKKb6766PHjQWNJrtokA0%2Fimg.png)
 
 🟥 문제점
+
 T1과 T2가 공유 변수 sum에 접근하여 공유 데이터 sum이 훼손
 
 🟥 해결 방법
+
 한 스레드가 공유 데이터 사용을 마칠 때 까지 다른 스레드가 공유 데이터에 접근하지 못하도록 제어
 
 🟡 스레드 동기화와 관련된 중요 개념
@@ -204,9 +206,11 @@ T1과 T2가 공유 변수 sum에 접근하여 공유 데이터 sum이 훼손
   * 상호 배제 : 멀티스레드가 실행되는 환경에서 한 스레드가 임계구역 전체를 배타적으로 실행하도록 보장하는 기법
 
 ##### 상호 배제 구현
+
 하드웨어적 방법 - 인터럽트 서비스 금지, 원자명령 활용
 
 1. 인터럽트 서비스 금지
+   
 임계구역으로 진입할 때 entry 코드에서 인터럽트 서비스를 금지하고 exit 코드에서 인터럽트 서비스를 허용하는 CPU 명령들을 실행하는 방법
 
 ❗동작 과정
@@ -217,9 +221,11 @@ T1과 T2가 공유 변수 sum에 접근하여 공유 데이터 sum이 훼손
 2. 단일 CPU 시스템에서는 활용 가능하지만 멀티코어를 비롯한 다중 CPU를 가진 시스템에서는 활용할 수 없다.
 
 2. 원자명령(Atomic instruction) 사용
+
 상호배제를 위해 만들어진 CPU 명령으로 오늘날 상호배제를 구현하기 위해 사용하는 기법
 
 🟥 원자명령 없이 lock 변수를 이용한 상호 배체 시도
+
 lock 변수 : 1이면 잠금 상태 0이면 열린 상태
 
 ![성공 사례](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbtsLkR%2FbtscmMBImP1%2FH34lUhOBKCiCYuMGU9k1u0%2Fimg.png)
@@ -231,5 +237,63 @@ lock 변수 값을 읽어 들이는 명령과 lock 변수를 1로 바꾸는 명�
 
 🟥 해결 방법 - 원자명령 도입
 
+lock 변수 값을 읽어 들이는 명령과 lock 변수를 1로 저장하는 명령을 하나의 명령으로 만드는 것 (원자명령 혹은 TSL)
 
+![TSL](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbkqA7U%2FbtsbVe0RG14%2Fo9Fk79s3o8ZOxKkRB0PkG1%2Fimg.png)
 
+##### 멀티스레드 동기화 기법
+
+여러 스레드들이 문제 없이 공유 자원을 활용하도록 하는 기법
+
+- lock 방식 - 뮤텍스(mutex), 스핀락(spinlock)
+- wait-signal 방식 - 세마포(semaphore)
+
+1. 뮤텍스
+
+- 잠김/열림 중 한 상태를 가지는 락 변수 사용
+- 한 스레드만 임계구역에 진입시키고 다른 스레드들을 큐에 대기시킴
+- 임계구역의 실행 시간이 짧은 경우 비효율적
+![뮤텍스 기법 동기화 구조](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdWaGm%2FbtsbSLk1Kd6%2FiplljaUQ85byJUpAujIEE1%2Fimg.png)
+
+🟥 뮤텍스를 활용한 스레드 동기화 과정
+![뮤텍스 동기화 과정](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbpEIRl%2Fbtsb6Z9Cx2J%2FxJyy7TmNmUaq7jCOXfaZcK%2Fimg.png)
+
+2. 스핀락
+
+- 락 변수를 기반
+- 뮤텍스와 달리 대기 큐 X
+- 커널에서 많이 사용
+- 뮤텍스 기법의 **busy-waiting** 모형
+- 단일 CPU를 가진 운영체제에서 비효율적
+- 임계구역 코드가 짧아서 락이 빨리 열리는 응용에 효과적
+- 기아 발생 가능
+![스핀락 동기화 구조](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F1l9vB%2FbtscfBm0IXp%2FzFzBaecdbn1qlr5sIT1840%2Fimg.png)
+
+🟥 스핀락을 활용한 스레드 동기화 과정
+![스핀락 동기화 과정](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FpBpvd%2FbtscmKYdNhB%2FApzQuaiEjAD2OlgGOLSDkk%2Fimg.png)
+
+🟥 뮤텍스와 스핀락의 비교
+
+||뮤텍스|스핀락|
+|:---|:---|:---|
+|대기큐|있음|없음|
+|블록 가능 여부|락이 잠겨 있으면 블록|락이 잠겨 있어도 블록되지 않고 계속 락 검사|
+|lock/unlock 연산 비용|저비용|고비용|
+|하드웨어 관련|단일 CPU에 적합|멀티코어 CPU에 적합|
+|주 사용처|사용자 응용프로그램|커널 코드, 인터럽스 서비스 루틴|
+
+3. 세마포
+
+n개의 자원을 다수의 스레드가 공유하여 사용하도록 돕는 자원 관리 기법
+
+🟥 세마포가 필요한 상황
+![세마포 필요 상황](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fba8VIW%2Fbtsb2TBWIow%2FjKJ9yvFkGOwsyvOwZiTQIK%2Fimg.png)
+
+🟥 세마포 구성 요소
+- 자원 - n개
+- 대기 큐 - 자원을 할당받지 못한 스레드가 잠자는 곳
+- counter 변수 - 사용가능한 자원의 개수를 나타내는 정수형 변수
+- P/V 연산 - P 연산은 자원 요청 시, V 연산은 자원 반환 시 실행되는 연산
+
+![세마포](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdqsiKl%2Fbtsb1RRRhLq%2FVxucV0Bybtkak8cNPxeLvK%2Fimg.png)
+_____
