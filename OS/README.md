@@ -214,6 +214,7 @@ T1과 T2가 공유 변수 sum에 접근하여 공유 데이터 sum이 훼손
 임계구역으로 진입할 때 entry 코드에서 인터럽트 서비스를 금지하고 exit 코드에서 인터럽트 서비스를 허용하는 CPU 명령들을 실행하는 방법
 
 ❗동작 과정
+
 ![인터럽트 서비스 금지](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcBQ0J7%2FbtsbSfmkBun%2Fqmi107wha0gHkiDuJRjTWk%2Fimg.png)
 
 **문제점**
@@ -256,6 +257,7 @@ lock 변수 값을 읽어 들이는 명령과 lock 변수를 1로 저장하는 �
 ![뮤텍스 기법 동기화 구조](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdWaGm%2FbtsbSLk1Kd6%2FiplljaUQ85byJUpAujIEE1%2Fimg.png)
 
 🟥 뮤텍스를 활용한 스레드 동기화 과정
+
 ![뮤텍스 동기화 과정](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbpEIRl%2Fbtsb6Z9Cx2J%2FxJyy7TmNmUaq7jCOXfaZcK%2Fimg.png)
 
 2. 스핀락
@@ -270,6 +272,7 @@ lock 변수 값을 읽어 들이는 명령과 lock 변수를 1로 저장하는 �
 ![스핀락 동기화 구조](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F1l9vB%2FbtscfBm0IXp%2FzFzBaecdbn1qlr5sIT1840%2Fimg.png)
 
 🟥 스핀락을 활용한 스레드 동기화 과정
+
 ![스핀락 동기화 과정](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FpBpvd%2FbtscmKYdNhB%2FApzQuaiEjAD2OlgGOLSDkk%2Fimg.png)
 
 🟥 뮤텍스와 스핀락의 비교
@@ -287,6 +290,7 @@ lock 변수 값을 읽어 들이는 명령과 lock 변수를 1로 저장하는 �
 n개의 자원을 다수의 스레드가 공유하여 사용하도록 돕는 자원 관리 기법
 
 🟥 세마포가 필요한 상황
+
 ![세마포 필요 상황](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fba8VIW%2Fbtsb2TBWIow%2FjKJ9yvFkGOwsyvOwZiTQIK%2Fimg.png)
 
 🟥 세마포 구성 요소
