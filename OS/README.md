@@ -98,3 +98,29 @@ _____
 
 ![Process and Thread](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkHGmX%2FbtsaESFpHrp%2F6if2bm4y7XjTg9iT3vnTyK%2Fimg.png)
 _____
+### 🔴 CPU 스케줄링
+준비(Ready) 상태에 있는 스레드들 중 하나를 선택하여 CPU를 할당하는 과정
+
+**비선점 스케줄링**
+실행 중인 스레드가 자발적으로 종료하거나 기다릴 때까지 CPU 제어권을 다른 프로세스에게 넘기지 않는 스케줄링 방식
+
+- SRTF(Shortest Remaining Time First)
+- Priority 스케줄링 (non-preemptive version)
+
+**선점 스케줄링**
+현재 실행 중인 스레드를 강제로 중단시켜 준비 리스트로 이동시키고 스케줄링하는 방식
+
+- RR(Round Robin)
+- SJF(Shortest Jpb First)
+- Prirority (preemtive version)
+
+### 다양한 CPU 스케줄링 알고리즘
+1. FCFS(First Come First Served) 스케줄링
+   * 큐에 먼저 도착한 스레드를 먼저 스케줄링
+   * 비선점 스케줄링
+   * 일반적으로 기아는 발생되지 않음
+   * 처리율이 낮음
+
+❗실행사례
+![FCFS](
+  
