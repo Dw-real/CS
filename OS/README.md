@@ -307,10 +307,16 @@ _____
 컴퓨터 시스템에서 교착상태는 **다중프로그래밍** 도입과 함께 발생
 
 🟥 식사하는 철학자 문제
+
 ![식사하는 철학자](https://i.namu.wiki/i/yK-_patdtMNP-901Y93kyV8FSwg4ze2ZQ-OPSGrNiKFYBnCHnIpMaQusYkIy_CAIHEXpEgKt9e6XsDRDpkFsbQk298AeCtY7SHMmjXwqBIBhIg4yPhfLyAGvelKOq0bWBUHqT3pUmglenu-KWYO0zA.webp)
 
 ❗ 5명이 동시에 왼쪽 포크를 들고 오른쪽 포크를 집으려고 하는 경우 교착상태 발생
 
 - 원인 : 환형 요청/대기
-  ㅇㄹㄴㅇㄹㅇㄴ
+
+5명 모두 왼쪽 포크를 가진 상태에서 동시에 자신의 오른쪽 철학자가 가진 포크를 요청하여 환형 고리를 생성, 이 환형 고리를 스스로 해체할 수 없어 교착상태 발생
 - 해결 : 환형 요청/대기가 생기지 않게 규칙 변경
+
+5명 중 4명은 왼쪽 포크를 잡은 뒤 오른쪽 포크를 잡는 순서라면 나머지 한 철학자만 오른쪽 포크를 먼저 잡은 뒤 왼쪽 포크를 잡도록 규칙을 변경하여 교착상태 해결
+
+
