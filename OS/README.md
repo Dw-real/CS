@@ -301,3 +301,16 @@ n개의 자원을 다수의 스레드가 공유하여 사용하도록 돕는 자
 
 ![세마포](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdqsiKl%2Fbtsb1RRRhLq%2FVxucV0Bybtkak8cNPxeLvK%2Fimg.png)
 _____
+### 🔴 교착상태(Deadlock)
+두 개 이상의 프로세스가 서로 자원을 기다리면서 무한히 대기하는 상태
+
+컴퓨터 시스템에서 교착상태는 **다중프로그래밍** 도입과 함께 발생
+
+🟥 식사하는 철학자 문제
+![식사하는 철학자](https://i.namu.wiki/i/yK-_patdtMNP-901Y93kyV8FSwg4ze2ZQ-OPSGrNiKFYBnCHnIpMaQusYkIy_CAIHEXpEgKt9e6XsDRDpkFsbQk298AeCtY7SHMmjXwqBIBhIg4yPhfLyAGvelKOq0bWBUHqT3pUmglenu-KWYO0zA.webp)
+
+❗ 5명이 동시에 왼쪽 포크를 들고 오른쪽 포크를 집으려고 하는 경우 교착상태 발생
+
+- 원인 : 환형 요청/대기
+  ㅇㄹㄴㅇㄹㅇㄴ
+- 해결 : 환형 요청/대기가 생기지 않게 규칙 변경
