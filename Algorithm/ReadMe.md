@@ -81,7 +81,7 @@ _____
 
 🟥 lower_bound
 
-'''
+```java
 public int lowerBound(int[] arr, int value) {
         int low = 0;
         int high = arr.length - 1;
@@ -98,11 +98,11 @@ public int lowerBound(int[] arr, int value) {
 
         return high;
 }
-'''
+```
 
 🟥 upper_bound
 
-'''
+```java
 static int upperBound(int[] arr, int value) {
         int low = 0;
         int high = arr.length - 1;
@@ -119,7 +119,8 @@ static int upperBound(int[] arr, int value) {
 
         return high;
 }
-'''
+```
+
 ⭐ upper_bound - lower_bound를 통해 중복되는 특정 원소의 개수를 구할 수 있음
 
 _____
