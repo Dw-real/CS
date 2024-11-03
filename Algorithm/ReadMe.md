@@ -103,7 +103,7 @@ public int lowerBound(int[] arr, int value) {
 🟥 upper_bound
 
 ```java
-public int upperBound(int[] arr, int value) {
+public int upperBound(int[] arr, int value) {
         int low = 0;
         int high = arr.length - 1;
         int mid;
