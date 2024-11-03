@@ -78,6 +78,50 @@ _____
 - 시간복잡도 (OlogN)
 
 ⭐ lower_bound, upper_boud, 파라메트릭 서치
+
+🟥 lower_bound
+
+'''
+public int lowerBound(int[] arr, int value) {
+        int low = 0;
+        int high = arr.length - 1;
+        int mid;
+
+        while (low < high) {
+            mid = (low + high) / 2;
+
+            if (arr[mid] >= value)
+                high = mid;
+            else
+                low = mid + 1;
+        }
+
+        return high;
+}
+'''
+
+🟥 upper_bound
+
+'''
+static int upperBound(int[] arr, int value) {
+        int low = 0;
+        int high = arr.length - 1;
+        int mid;
+
+        while (low < high) {
+            mid = (low + high) / 2;
+
+            if (arr[mid] > value)
+                high = mid;
+            else
+                low = mid + 1;
+        }
+
+        return high;
+}
+'''
+⭐ upper_bound - lower_bound를 통해 중복되는 특정 원소의 개수를 구할 수 있음
+
 _____
 ### 🔴 동적 계획법
 큰 문제를 작은 하위 문제로 나누어, 각 하위 문제의 결과를 저장해 중복 계산을 피하며 최적의 해를 구하는 알고리즘
